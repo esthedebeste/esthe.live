@@ -49,7 +49,7 @@ main {
 	font-size: 1.5em;
 	display: flex;
 	padding: 1em;
-	min-width: max-content;
+	min-width: fit-content;
 	align-items: center;
 	flex-direction: column;
 	background-color: #fff3;

@@ -8,7 +8,6 @@
 	<h1>HIII!!!</h1>
 	welcome to the esthe page :3<br />
 	my socials are @ the bottom of the page feel free to follow :) <br />
-	<br />
 	going to be adding more stuff here soon :D (who's excited for the esthe blog & rss feed⁉️⁉️⁉️)
 </main>
 
