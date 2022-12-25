@@ -2,7 +2,7 @@
 	import { page } from "$app/stores"
 	import { posts } from "./posts.js"
 	import Box from "$lib/Box.svelte"
-	import Meta from "../../lib/Meta.svelte"
+	import Meta from "$lib/Meta.svelte"
 	$: path = $page.url.pathname
 	$: meta = posts.find((post) => post.path === path)
 </script>

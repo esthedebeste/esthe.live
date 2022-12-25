@@ -7,5 +7,5 @@
 	<title>{title}</title>
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="description" content={description} />
+	<meta name="description" content={description} />
 </svelte:head>

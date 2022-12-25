@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Box from "$lib/Box.svelte"
 	import Meta from "$lib/Meta.svelte"
-	import InvisibleA from "../lib/InvisibleA.svelte"
-	import Post from "../lib/Post.svelte"
+	import Post from "$lib/Post.svelte"
 	import { posts } from "./posts/posts.js"
 </script>
 
@@ -10,9 +9,15 @@
 
 <Box tag="main">
 	<h1>HIII!!!</h1>
-	welcome to the esthe page :3<br />
-	my socials are @ the bottom of the page feel free to follow :) <br />
-	going to be adding more stuff here soon :D (who's excited for the esthe blog & rss feed⁉️⁉️⁉️)
+	<p>
+		welcome to the esthe page :3<br />
+		my socials are at the bottom of the page (as well as my rss feed⁉️⁉️⁉️) so feel free to follow :)
+		<br />
+		i'm going to use this site to post about my projects and stuff, so if you're interested in that,
+		you can subscribe to my rss feed! <br />
+		site made with sveltekit :D (source code is on
+		<a href="https://github.com/tbhmens/esthe-live">github</a>)
+	</p>
 </Box>
 
 <h1>posts!</h1>
