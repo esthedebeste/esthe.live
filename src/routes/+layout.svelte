@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Space from "$lib/Space.svelte"
+	import Links from "$lib/Links.svelte"
 	import "../global.css"
-	import Links from "../lib/Links.svelte"
 </script>
 
 <Space ro={35} rm={10} go={0} gm={5} bo={15} bm={10} />
@@ -10,12 +10,14 @@
 	<slot />
 </div>
 
-<Links />
+<footer>
+	<Links />
+</footer>
 
 <style>
 	div {
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 1em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 </style>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 248 204">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 204">
 	<title>Twitter</title>
 	<path
 		fill="#1d9bf0"

@@ -16,7 +16,8 @@
 	$: noiseScalar = (750 / resScalar) * logwsw
 	export let ro: number, rm: number, go: number, gm: number, bo: number, bm: number
 	let pTime = 0
-	const goalFrameTime = 1000 / 24
+	const goalFps = 15
+	const goalFrameTime = 1000 / goalFps
 	function render(time: number) {
 		requestAnimationFrame(render)
 		if (time - pTime < goalFrameTime) return
@@ -59,8 +60,9 @@
 />
 
 {#if showFps}
-	Frametime: {frameTime.toFixed(0)}ms ({#if frameTime < goalFrameTime}running at 24fps, maximum of
-	{/if}{(1000 / frameTime).toPrecision(3)} FPS)
+	Frametime: {frameTime.toFixed(0)}ms (running at {#if frameTime < goalFrameTime}{goalFps}{:else}{(
+			1000 / frameTime
+		).toPrecision(3)}{/if}fps)
 {/if}
 <canvas bind:this={canvas} {width} {height} aria-hidden="true" />
 

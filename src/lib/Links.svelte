@@ -4,6 +4,7 @@
 	import Twitch from "./icons/Twitch.svelte"
 	import Twitter from "./icons/Twitter.svelte"
 	import { onMount } from "svelte"
+	import Rss from "./icons/RSS.svelte"
 	let discord = "https"
 	onMount(() => {
 		// open in app if on pc, phones dont implement discord://
@@ -28,24 +29,27 @@
 			href="{discord}://discord.com/users/342607061059633153"><Discord /></a
 		>
 	</li>
+	<li>
+		<a href="/posts.xml"><Rss /></a>
+	</li>
 </ul>
 
 <style>
-	a {
-		font-size: 4em;
-	}
 	ul {
+		font-size: min(3em, 15vw);
 		display: flex;
 		flex-direction: row;
-		gap: 3ch;
-		position: absolute;
+		list-style: none;
+		margin: 0;
+		position: fixed;
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		padding: 1em;
 		background-color: #ffffff0b;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
+		padding: 0.4em;
+		gap: 0.3ch;
 	}
 	li {
 		line-height: 1em;
