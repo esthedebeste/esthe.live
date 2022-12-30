@@ -2,9 +2,14 @@
 	import Space from "$lib/Space.svelte"
 	import Links from "$lib/Links.svelte"
 	import "../global.css"
+	import { page } from "$app/stores"
 </script>
 
-<Space ro={35} rm={10} go={0} gm={5} bo={15} bm={10} />
+{#if $page.url.pathname.startsWith("/darkness")}
+	<Space ro={3} rm={20} go={1} gm={7} bo={1} bm={3} />
+{:else}
+	<Space ro={35} go={0} bo={15} />
+{/if}
 
 <div>
 	<slot />

@@ -3,35 +3,15 @@
 	import Github from "./icons/Github.svelte"
 	import Twitch from "./icons/Twitch.svelte"
 	import Twitter from "./icons/Twitter.svelte"
-	import { onMount } from "svelte"
 	import Rss from "./icons/RSS.svelte"
-	let discord = "https"
-	onMount(() => {
-		// open in app if on pc, phones dont implement discord://
-		discord = "ontouchstart" in window ? "https" : "discord"
-	})
 </script>
 
 <ul>
-	<li>
-		<a target="_blank" rel="noreferrer" href="https://twitch.tv/esthedebeste"><Twitch /></a>
-	</li>
-	<li>
-		<a target="_blank" rel="noreferrer" href="https://twitter.com/esthedebeste"><Twitter /></a>
-	</li>
-	<li>
-		<a target="_blank" rel="noreferrer" href="https://github.com/tbhmens"><Github /></a>
-	</li>
-	<li>
-		<a
-			target="_blank"
-			rel="nofollow noreferrer"
-			href="{discord}://discord.com/users/342607061059633153"><Discord /></a
-		>
-	</li>
-	<li>
-		<a href="/posts.xml"><Rss /></a>
-	</li>
+	<li><Twitch /></li>
+	<li><Twitter /></li>
+	<li><Github /></li>
+	<li><Discord /></li>
+	<li><Rss /></li>
 </ul>
 
 <style>
@@ -50,6 +30,14 @@
 		border-top-right-radius: 20px;
 		padding: 0.4em;
 		gap: 0.3ch;
+	}
+	:global(body[data-darkness="true"]) ul {
+		font-size: min(1.5em, 7.5vw);
+		background-color: #ffffff01;
+		opacity: 0.25;
+		left: 0;
+		transform: translateX(0);
+		gap: 0.7ch;
 	}
 	li {
 		line-height: 1em;

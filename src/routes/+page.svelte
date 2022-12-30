@@ -14,7 +14,7 @@
 		my socials are at the bottom of the page (as well as my rss feed⁉️⁉️⁉️) so feel free to follow :)
 		<br />
 		i'm going to use this site to post about my projects and stuff, so if you're interested in that,
-		you can subscribe to my rss feed! <br />
+		you can subscribe to the rss feed! <br />
 		site made with sveltekit :D (source code is on
 		<a href="https://github.com/tbhmens/esthe-live">github</a>)
 	</p>

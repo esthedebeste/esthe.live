@@ -7,7 +7,6 @@ html {
 	height: 100%;
 	font-family: system-ui, sans-serif;
 	font-weight: 200;
-	background-color: #270313;
 	color: #ffffff;
 	--link-color: #00a2ff;
 	--link-visited-color: #00a0ff;
@@ -18,6 +17,10 @@ body {
 	height: 100%;
 	margin: 0;
 	font-size: 1.5em;
+	background-color: #270313;
+}
+body[data-darkness="true"] {
+	background-color: black;
 }
 
 a {
@@ -34,6 +37,13 @@ a:visited {
 h1 {
 	font-weight: 600;
 	font-size: 2em;
+}
+
+p,
+h1,
+h2,
+ul {
+	margin: 0.25em 0 0.25em 0;
 }
 
 ul {

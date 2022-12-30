@@ -30,37 +30,12 @@ Deno.writeTextFileSync(
 		[/{ymd}/g, `${year}-${month}-${day}`]
 	)
 )
-Deno.writeTextFileSync(
-	new URL("./posts.ts", import.meta.url),
-	rep(Deno.readTextFileSync(new URL("./posts.ts", import.meta.url)), [
-		"/*begin posts*/",
-		"/*begin posts*/\n\t" + JSON.stringify({ slug, title, description, path, date }) + ",",
-	])
-)
-
-const p = (n: number, len = 2) => n.toString().padStart(len, "0")
-// prettier-ignore
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-
-const dateToRSS = (date: Date) =>
-	`${days[date.getUTCDay()]}, ${date.getUTCDate()} ${
-		months[date.getUTCMonth()]
-	} ${date.getUTCFullYear()} ${p(date.getUTCHours())}:${p(date.getUTCMinutes())}:${p(
-		date.getUTCSeconds()
-	)} +0000`
 
 Deno.writeTextFileSync(
-	new URL("../../../static/posts.xml", import.meta.url),
-	rep(Deno.readTextFileSync(new URL("../../../static/posts.xml", import.meta.url)), [
-		"<!--begin items-->",
-		`<!--begin items-->
-		<item>
-			<title>${title}</title>
-			<description>${description}</description>
-			<link>https://esthe.live${path}</link>
-			<pubDate>${dateToRSS(date)}</pubDate>
-		</item>`,
+	new URL("./posts.json", import.meta.url),
+	JSON.stringify([
+		{ slug, title, description, path, date },
+		...JSON.parse(Deno.readTextFileSync(new URL("./posts.json", import.meta.url))),
 	])
 )
 

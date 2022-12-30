@@ -14,12 +14,18 @@
 	$: logwsw = Math.log2(width) / wslog
 	$: resScalar = Math.round((6 * width) / 2560)
 	$: noiseScalar = (750 / resScalar) * logwsw
-	export let ro: number, rm: number, go: number, gm: number, bo: number, bm: number
+	export let ro = 0,
+		rm = 10,
+		go = 0,
+		gm = 10,
+		bo = 0,
+		bm = 10
 	let pTime = 0
 	const goalFps = 15
 	const goalFrameTime = 1000 / goalFps
+	let animId: number | null = null
 	function render(time: number) {
-		requestAnimationFrame(render)
+		animId = requestAnimationFrame(render)
 		if (time - pTime < goalFrameTime) return
 		if (!ctx) return
 		pTime = time
@@ -47,7 +53,10 @@
 		width = innerWidth
 		height = innerHeight
 		ctx = canvas.getContext("2d")
-		requestAnimationFrame(render)
+		animId = requestAnimationFrame(render)
+		return () => {
+			if (animId != null) cancelAnimationFrame(animId)
+		}
 	})
 </script>
 
