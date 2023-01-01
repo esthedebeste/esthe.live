@@ -1,0 +1,104 @@
+/**
+ * thank you to https://github.com/AGMStudio/prism-theme-one-dark!
+ * @author Lea Verou, modified by me to fit the vibe better
+ */
+:not(pre) > code,
+pre[class*="language-"] {
+	color: #abb2bf;
+	font-family: "Cascadia Code", monospace;
+	white-space: pre;
+	tab-size: 4;
+	hyphens: none;
+}
+
+pre[class*="language-"] ::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"] ::selection,
+code[class*="language-"] ::selection {
+	background: #fff3;
+}
+
+:not(pre) > code,
+pre[class*="language-"] {
+	padding: 0.2em 0.8ch;
+	font-size: 0.9em;
+	overflow: auto;
+	border-radius: 0.3em;
+	background: #0004;
+}
+
+:not(pre) > code {
+	padding: 0.1ch;
+	/* a little bit brighter to match other text more */
+	color: #c4ccdc;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #5c6370;
+}
+
+.token.punctuation {
+	color: #abb2bf;
+}
+
+.token.selector,
+.token.tag {
+	color: #e06c75;
+}
+
+.token.property,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.attr-name,
+.token.deleted {
+	color: #d19a66;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.builtin,
+.token.inserted {
+	color: #98c379;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #56b6c2;
+}
+
+.token.atrule,
+.token.keyword {
+	color: #c678dd;
+}
+
+.token.function {
+	color: #61afef;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #c678dd;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}

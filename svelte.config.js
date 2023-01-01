@@ -2,6 +2,8 @@ import adapter from "@sveltejs/adapter-static"
 import { vitePreprocess } from "@sveltejs/kit/vite"
 import { mdsvex } from "mdsvex"
 import { readFileSync, writeFileSync } from "fs"
+import remarkGfm from "remark-gfm"
+import rehypeSlug from "rehype-slug"
 
 const p = (n, len = 2) => n.toString().padStart(len, "0")
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -16,7 +18,14 @@ const dateToRSS = (date) =>
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), mdsvex({ extensions: [".md"] })],
+	preprocess: [
+		vitePreprocess(),
+		mdsvex({
+			extensions: [".md"],
+			remarkPlugins: [remarkGfm],
+			rehypePlugins: [rehypeSlug],
+		}),
+	],
 	kit: {
 		adapter: {
 			name: "@sveltejs/adapter-static + rss generation",
@@ -38,7 +47,8 @@ const config = {
 						.match(/<main.*?>(.*?)\s*<a href="\/"/s)[1] // get the main content until the "back to homepage" link
 						.replace('href="/', 'href="https://esthe.live/') // fix links to be absolute
 						.replace('src="/', 'src="https://esthe.live/')
-						.replace(/ class=".*?"/, "") // remove classes because we're not sending css anyway
+						.replace(/ class="svelte-.*?"/g, "") // remove svelte classes because we're not sending css anyway
+						.replace(/<!--.*?-->/gs, "") // remove comments
 					contents += `
 		<item>
 			<title>${post.title}</title>
@@ -55,10 +65,12 @@ const config = {
 				writeFileSync("build/posts.rss", contents)
 			},
 		},
+		appDir: "_silly", // silly
 	},
 	extensions: [".svelte", ".md"],
 	compilerOptions: {
 		sourcemap: true,
+		preserveComments: true,
 	},
 }
 

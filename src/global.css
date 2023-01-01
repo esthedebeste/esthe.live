@@ -10,6 +10,13 @@ html {
 	color: #ffffff;
 	--link-color: #00a2ff;
 	--link-visited-color: #00a0ff;
+	scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
 }
 
 body {
@@ -34,18 +41,32 @@ a:visited {
 	color: var(--link-visited-color);
 }
 
-h1 {
-	font-weight: 600;
-	font-size: 2em;
-}
-
 p,
 h1,
 h2,
+h3,
 ul {
 	margin: 0.25em 0 0.25em 0;
+}
+h4,
+h5,
+h6 {
+	margin: 0;
 }
 
 ul {
 	list-style: "- ";
+}
+
+:target {
+	animation: highlight 2s ease-in-out;
+}
+
+@keyframes highlight {
+	0% {
+		background-color: #d82171;
+	}
+	100% {
+		background-color: transparent;
+	}
 }
