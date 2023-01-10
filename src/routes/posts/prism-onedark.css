@@ -21,7 +21,7 @@ code[class*="language-"] ::selection {
 :not(pre) > code,
 pre[class*="language-"] {
 	padding: 0.2em 0.8ch;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	overflow: auto;
 	border-radius: 0.3em;
 	background: #0004;

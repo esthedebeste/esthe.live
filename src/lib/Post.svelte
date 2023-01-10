@@ -22,10 +22,12 @@
 	:global(a):visited h1 {
 		color: var(--link-visited-color);
 	}
+	:global(a) h1 {
+		transition: transform 175ms ease-in-out;
+	}
 	:global(a):hover h1 {
 		transform: scaleX(130%) translateX(12%);
 		text-decoration: underline;
-		transition: transform 175ms ease-in-out;
 	}
 	p {
 		margin: 0;

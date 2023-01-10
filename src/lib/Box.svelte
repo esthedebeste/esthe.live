@@ -31,8 +31,7 @@
 	/* pc */
 	@media screen and (min-width: 768px) {
 		* {
-			max-width: 75vw;
-			min-width: 60vw;
+			width: 60vw;
 		}
 	}
 </style>
