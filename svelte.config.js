@@ -4,18 +4,29 @@ import { mdsvex } from "mdsvex"
 import { readFileSync, writeFileSync } from "fs"
 import remarkGfm from "remark-gfm"
 import rehypeSlug from "rehype-slug"
+import { readdir } from "fs/promises"
 
 const p = (n, len = 2) => n.toString().padStart(len, "0")
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
-const dateToRSS = (date) =>
+const dateToRSS = date =>
 	`${days[date.getUTCDay()]}, ${date.getUTCDate()} ${
 		months[date.getUTCMonth()]
 	} ${date.getUTCFullYear()} ${p(date.getUTCHours())}:${p(date.getUTCMinutes())}:${p(
 		date.getUTCSeconds()
 	)} +0000`
 
+async function lsRecursive(dir) {
+	const dirents = await readdir(dir, { withFileTypes: true })
+	const files = await Promise.all(
+		dirents.map(dirent => {
+			const path = dir + "/" + dirent.name
+			return dirent.isDirectory() ? lsRecursive(path) : path
+		})
+	)
+	return files.flat(Infinity)
+}
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [
@@ -31,9 +42,10 @@ const config = {
 			name: "@sveltejs/adapter-static + rss generation",
 			async adapt(builder) {
 				await adapter({ pages: "build", fallback: "404.html" }).adapt(builder)
+
+				// create /posts.rss
 				/** @type {import("./src/routes/posts/posts.json")} */
 				const posts = JSON.parse(readFileSync("./src/routes/posts/posts.json", "utf8"))
-				// construct posts.rss
 				let contents = `\
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -63,6 +75,15 @@ const config = {
 	</channel>
 </rss>`
 				writeFileSync("build/posts.rss", contents)
+
+				// create /sitemap.txt
+				const files = await lsRecursive("build")
+				const sitemap = files
+					.filter(f => f.endsWith(".html") && !f.endsWith("404.html"))
+					.map(f => f.replace("build", "https://esthe.live"))
+					.map(f => f.replace(/index\.html$/, ""))
+					.join("\n")
+				writeFileSync("build/sitemap.txt", sitemap)
 			},
 		},
 		appDir: "_silly", // silly
