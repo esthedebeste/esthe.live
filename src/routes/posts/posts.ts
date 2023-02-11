@@ -9,7 +9,7 @@ export type Post = {
 
 import rawPosts from "./posts.json"
 
-export const posts: Post[] = rawPosts.map((p) => ({
+export const posts: Post[] = rawPosts.map(p => ({
 	...p,
 	date: new Date(p.date),
 	ymd: p.date.split("T")[0],

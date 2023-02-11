@@ -20,6 +20,7 @@
 		flex-direction: column;
 		background-color: #fff3;
 		border-radius: 15px;
+		box-shadow: 0 0 1em #fff3;
 	}
 	/* mobile */
 	@media screen and (max-width: 768px) {

@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	text-rendering: optimizeLegibility;
 }
 
 html {
@@ -9,7 +10,9 @@ html {
 	font-weight: 200;
 	color: #ffffff;
 	--link-color: #00a2ff;
+	--link-color-halfopacity: #00a2ff88;
 	--link-visited-color: #00a0ff;
+	--link-visited-color-halfopacity: #00a0ff88;
 	scroll-behavior: smooth;
 }
 
@@ -40,12 +43,14 @@ body[data-darkness="true"] {
 a {
 	color: var(--link-color);
 	text-decoration: none;
+	text-shadow: 0 0 0.4em var(--link-color-halfopacity);
 }
 a:hover {
 	text-decoration: underline;
 }
 a:visited {
 	color: var(--link-visited-color);
+	text-shadow: 0 0 0.4em var(--link-visited-color-halfopacity);
 }
 
 p,

@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Discord from "./icons/Discord.svelte"
 	import Github from "./icons/Github.svelte"
+	import Mastodon from "./icons/Mastodon.svelte"
+	import Rss from "./icons/RSS.svelte"
 	import Twitch from "./icons/Twitch.svelte"
 	import Twitter from "./icons/Twitter.svelte"
-	import Rss from "./icons/RSS.svelte"
 </script>
 
 <ul>
 	<li><Twitch /></li>
 	<li><Twitter /></li>
+	<li><Mastodon /></li>
 	<li><Github /></li>
 	<li><Discord /></li>
 	<li><Rss /></li>
