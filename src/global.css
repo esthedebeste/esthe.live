@@ -16,6 +16,11 @@ html {
 	scroll-behavior: smooth;
 }
 
+::selection {
+	background-color: #a81e5a88;
+	color: #ffffff;
+}
+
 @media screen and (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;

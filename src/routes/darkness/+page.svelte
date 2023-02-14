@@ -3,7 +3,7 @@
 </script>
 
 <Meta title="darkness" description=":3" />
-<main>fallen</main>
+<main>angel,</main>
 
 <style>
 	main {
@@ -15,6 +15,6 @@
 		font-size: 1.5em;
 		text-align: center;
 		color: #fff;
-		text-shadow: 0 0 1.5em darkred, 0 0 1.5em darkred;
+		text-shadow: 0 0 1.5em #8b0000, 0 0 1.5em darkred;
 	}
 </style>
