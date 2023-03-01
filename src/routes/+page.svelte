@@ -20,7 +20,7 @@
 			i'm going to use this site to post about my projects and stuff, so if you're interested in that,
 			you can subscribe to the rss feed! <br />
 			site made with sveltekit :D (source code is on
-			<a href="https://github.com/tbhmens/esthe-live">github</a>)
+			<a href="https://github.com/esthedebeste/esthe-live">github</a>)
 		</p>
 	</Box>
 	<Box align="start">
@@ -36,10 +36,10 @@
 		<h3>feel free to check out</h3>
 		<ul>
 			<li>
-				<a href="https://github.com/tbhmens/chatties">chatties</a> (a twitch chat client i made)
+				<a href="https://github.com/esthedebeste/chatties">chatties</a> (a twitch chat client i made)
 			</li>
 			<li>
-				<a href="https://github.com/tbhmens/65536>">65536</a> (a 2048 clone i made)
+				<a href="https://github.com/esthedebeste/65536>">65536</a> (a 2048 clone i made)
 			</li>
 			<li>
 				<details>
