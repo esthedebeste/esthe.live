@@ -39,7 +39,7 @@
 				<a href="https://github.com/esthedebeste/chatties">chatties</a> (a twitch chat client i made)
 			</li>
 			<li>
-				<a href="https://github.com/esthedebeste/65536>">65536</a> (a 2048 clone i made)
+				<a href="https://github.com/esthedebeste/65536">65536</a> (a 2048 clone i made)
 			</li>
 			<li>
 				<details>

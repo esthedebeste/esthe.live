@@ -1,9 +1,11 @@
 <script lang="ts">
-	import Space from "$lib/Space.svelte"
-	import Links from "$lib/Links.svelte"
-	import "../global.css"
 	import { page } from "$app/stores"
+	import Links from "$lib/Links.svelte"
+	import Space from "$lib/Space.svelte"
+	import "../global.css"
 </script>
+
+<!-- Fun fact! You're seeing this comment in your DevTools because of me :3 https://github.com/sveltejs/svelte/pull/7182 (live since 3.58.0) -->
 
 {#if $page.url.pathname.startsWith("/darkness")}
 	<Space ro={3} rm={20} go={1} gm={7} bo={1} bm={3} />
