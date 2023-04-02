@@ -92,6 +92,11 @@ const config = {
 	compilerOptions: {
 		sourcemap: true,
 		preserveComments: true,
+		// silly up!
+		cssHash({ hash, css, name }) {
+			const kebab = name.replaceAll(/[A-Z]/g, "-$&").toLowerCase().slice(1)
+			return `silly${kebab}_${hash(css)}`
+		},
 	},
 }
 
