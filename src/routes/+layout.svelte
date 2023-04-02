@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from "$app/stores"
 	import Links from "$lib/Links.svelte"
-	import Space from "$lib/Space.svelte"
 	import "../global.css"
+	import Space from "../lib/Space.svelte"
 </script>
 
 <!-- Fun fact! You're seeing this comment in your DevTools because of me :3 https://github.com/sveltejs/svelte/pull/7182 (live since 3.58.0) -->
 
 {#if $page.url.pathname.startsWith("/darkness")}
-	<Space ro={3} rm={20} go={1} gm={7} bo={1} bm={3} />
+	<Space ro={0} rm={0.18} go={0} gm={0.03} bo={0} bm={0.02} scale={4} />
 {:else}
 	<Space ro={35} go={0} bo={15} />
 {/if}

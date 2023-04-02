@@ -32,17 +32,13 @@ body {
 	height: 100%;
 	font-size: 1.5rem;
 	margin: 0;
-	background-color: #270313;
+	background-color: #3d0920;
 }
 
 @media screen and (max-width: 1000px) {
 	body {
 		font-size: 1.1rem;
 	}
-}
-
-body[data-darkness="true"] {
-	background-color: black;
 }
 
 a {

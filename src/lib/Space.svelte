@@ -1,62 +1,90 @@
 <script lang="ts">
 	import { onMount } from "svelte"
-	import { createNoise3D } from "simplex-noise"
-
-	const noise = createNoise3D()
+	import frag from "./Space.frag?raw"
+	import vert from "./Space.vert?raw"
 	let canvas: HTMLCanvasElement
-	let ctx: CanvasRenderingContext2D | null
-	let frameTime = 1
-	let showFps = false
-	;(globalThis as unknown as { showFps: () => boolean }).showFps = () => (showFps = !showFps)
+	export let ro = 35 / 255,
+		rm = 0.3,
+		go = 0,
+		gm = 0.1,
+		bo = 15 / 255,
+		bm = 0.2
+	export let scale = 5
+
 	let width = 1080
 	let height = 1920
-	const wslog = Math.log2(2560)
-	$: logwsw = Math.log2(width) / wslog
-	$: resScalar = Math.round((6 * width) / 2560)
-	$: noiseScalar = (750 / resScalar) * logwsw
-	export let ro = 0,
-		rm = 10,
-		go = 0,
-		gm = 10,
-		bo = 0,
-		bm = 10
-	let pTime = 0
-	const goalFps = 15
+	const goalFps = 24
 	const goalFrameTime = 1000 / goalFps
-	let animId: number | null = null
-	function render(time: number) {
-		animId = requestAnimationFrame(render)
-		if (time - pTime < goalFrameTime) return
-		if (!ctx) return
-		pTime = time
-		const w = width,
-			h = height
-		const t = time / 10000
-		const imgdata = ctx.getImageData(0, 0, w, h)
-		const data = imgdata.data
-		for (let x = 0; x < w / resScalar; x++)
-			for (let y = 0; y < h / resScalar; y++) {
-				let g = noise(x / noiseScalar, y / noiseScalar, t) * 0.5 + 0.5
-				for (let ax = 0; ax < resScalar; ax++)
-					for (let ay = 0; ay < resScalar; ay++) {
-						const i = (x * resScalar + ax + (y * resScalar + ay) * w) * 4
-						data[i] = g * rm + ro
-						data[i + 1] = g * gm + go
-						data[i + 2] = g * bm + bo
-						data[i + 3] = 255
-					}
-			}
-		ctx.putImageData(imgdata, 0, 0)
-		if (showFps) frameTime = performance.now() - time
+
+	function createGlShader(gl: WebGLRenderingContext, type: number, glsl: string) {
+		let shader = gl.createShader(type)
+		if (!shader) throw new Error("no shader")
+		gl.shaderSource(shader, glsl)
+		gl.compileShader(shader)
+		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+			console.log(gl.getShaderInfoLog(shader))
+			gl.deleteShader(shader)
+			throw new Error("shader compile error")
+		}
+		return shader
 	}
 	onMount(() => {
-		width = innerWidth
-		height = innerHeight
-		ctx = canvas.getContext("2d")
-		animId = requestAnimationFrame(render)
-		return () => {
-			if (animId != null) cancelAnimationFrame(animId)
+		width = window.innerWidth
+		height = window.innerHeight
+		const gl = canvas.getContext("webgl")
+		if (!gl) throw new Error("no webgl")
+
+		const vertShader = createGlShader(gl, gl.VERTEX_SHADER, vert)
+		const fragShader = createGlShader(gl, gl.FRAGMENT_SHADER, frag)
+		const program = gl.createProgram()
+		if (!program) throw new Error("no program")
+		gl.attachShader(program, vertShader)
+		gl.attachShader(program, fragShader)
+		gl.linkProgram(program)
+		if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+			console.error(gl.getProgramInfoLog(program))
+			gl.deleteProgram(program)
+			throw new Error("program link error")
 		}
+
+		const locations = {
+			a_position: gl.getAttribLocation(program, "a_position"),
+			iTime: gl.getUniformLocation(program, "iTime"),
+			iScale: gl.getUniformLocation(program, "iScale"),
+			iResolution: gl.getUniformLocation(program, "iResolution"),
+			iColorMultiplier: gl.getUniformLocation(program, "iColorMultiplier"),
+			iColorOffset: gl.getUniformLocation(program, "iColorOffset"),
+		}
+
+		const positionBuffer = gl.createBuffer()
+		gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-4, -4, +4, -4, 0, +4]), gl.STATIC_DRAW)
+
+		let pTime = 0
+		let animId = requestAnimationFrame(draw)
+		function draw(time: number) {
+			animId = requestAnimationFrame(draw)
+			if (time - pTime < goalFrameTime) return
+			pTime = time
+			if (!gl) throw new Error("no webgl")
+			const w = width
+			const h = height
+			gl.viewport(0, 0, w, h)
+			gl.useProgram(program)
+			gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
+			gl.vertexAttribPointer(locations.a_position, 2, gl.FLOAT, false, 0, 0)
+			gl.enableVertexAttribArray(locations.a_position)
+
+			gl.uniform1f(locations.iTime, time * 1e-3 * 0.15)
+			gl.uniform1f(locations.iScale, scale)
+			gl.uniform2f(locations.iResolution, w, h)
+			gl.uniform3f(locations.iColorOffset, ro / 255, go / 255, bo / 255)
+			gl.uniform3f(locations.iColorMultiplier, rm, gm, bm)
+
+			gl.drawArrays(gl.TRIANGLES, 0, 3)
+		}
+
+		return () => cancelAnimationFrame(animId)
 	})
 </script>
 
@@ -64,15 +92,8 @@
 	on:resize={() => {
 		width = window.innerWidth
 		height = window.innerHeight
-		ctx = canvas.getContext("2d")
 	}}
 />
-
-{#if showFps}
-	Frametime: {frameTime.toFixed(0)}ms (running at {#if frameTime < goalFrameTime}{goalFps}{:else}{(
-			1000 / frameTime
-		).toPrecision(3)}{/if}fps)
-{/if}
 <canvas bind:this={canvas} {width} {height} aria-hidden="true" />
 
 <style>
