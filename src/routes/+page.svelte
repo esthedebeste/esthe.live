@@ -51,14 +51,7 @@
 				<a href="https://github.com/esthedebeste/65536">65536</a> (a 2048 clone i made)
 			</li>
 			<li>
-				<details>
-					<summary>
-						a <a href="https://wfc.esthe.live/#3">demo of wave function collapsing</a> i built a while
-						ago :)
-					</summary>
-					(it generates pixelart based on rules like "green is not allowed to the right of green", "yellow
-					is not allowed above green", etc.)
-				</details>
+				a <a href="https://wfc-live.esthe.live/">demo of wave function collapsing</a> i built
 			</li>
 			<li>my twitch!!!!!! my twitter!!!!!! my rss feed!!!!!! my mastodon!!!!!! EVERYTHING!!!</li>
 		</ul>
@@ -78,16 +71,7 @@
 		margin: 0;
 	}
 	span.pronouns {
-		color: #aa00aa;
-	}
-	details {
-		font-size: 0.7em;
-	}
-	summary {
-		font-size: calc(1em / 0.7);
-		cursor: pointer;
-	}
-	li > details {
-		transform: translateX(-2ch);
+		color: #f0f;
+		text-shadow: 0 0 0.5em #000, 0 0 0.5em #0003;
 	}
 </style>
