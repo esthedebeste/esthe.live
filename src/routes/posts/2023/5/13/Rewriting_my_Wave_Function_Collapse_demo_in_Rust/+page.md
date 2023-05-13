@@ -23,7 +23,9 @@ Getting a random number is already 2 dependencies, my panics were unintelligable
 
 Cargo aside, rust's type system made it considerably more difficult to port. To avoid any unnecessary heap allocations, the collapse function `(x, y, chosen) -> options to close` was actually implemented by passing the collapser to the function, so that the function could call `wfc->remove_option(x, y, option)` and recurse. Rust didn't let me do this because memory safety&trade;. I slapped a `Vec<Collapse>` as the return type and it worked.
 
-Except it reintroduced the problem that I avoided in the C++ codebase and forgot about, which is a whole bunch of repeated heap allocations. Which made the whole rewrite much slower! 2 seconds on my PC, 7.5s on my phone. Not good. Thankfully, the entire rust community is obsessed with performance, and it's pretty easy to publish your own crate! `ArrayVec<Collapse>` ftw! It's a fixed-max-size array that can be used like a Vec, but it doesn't allocate on the heap. It's perfect for this use case! Took it to `<0.25` seconds on pc, and `<2` seconds on phone. I'm happy with that. Especially because I also figured out how to display a "Generating..." message.
+Except it reintroduced the problem that I avoided in the C++ codebase and forgot about, which is a whole bunch of repeated heap allocations. Which made the whole rewrite much slower! 2 seconds on my PC, 7.5s on my phone. Not good. Fun fact, in the first two weeks of this project being live, the initial image was actually prerendered as a `background-image: url(base64-png)` in the CSS. ([sorry saff](https://twitter.com/offbrandsaffron/status/1653442600546729990))
+
+Today I decided to fix that. Thankfully, the entire rust community is obsessed with performance, and it's pretty easy to publish your own crate! `ArrayVec<Collapse, 9>` ftw! It's a fixed-max-size array that can be used like a Vec, but it doesn't allocate on the heap. It's perfect for this use case! Took the generation time to `<0.25` seconds on pc, and `<2` seconds on phone. I'm happy with that. Especially because I also figured out how to display a "Generating..." message.
 
 ### The UI
 
