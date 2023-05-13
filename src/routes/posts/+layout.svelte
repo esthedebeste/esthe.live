@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from "$app/stores"
-	import { posts, type Post } from "./posts.js"
 	import Box from "$lib/Box.svelte"
+	import Homepage from "$lib/Homepage.svelte"
 	import Meta from "$lib/Meta.svelte"
-	import Homepage from "../../lib/Homepage.svelte"
+	import { posts, type Post } from "./posts.js"
 	import "./prism-onedark.css"
 	$: path = $page.url.pathname
-	$: meta = posts.find((post) => post.path === path) as Post
+	$: meta = posts.find(post => post.path === path) as Post
 </script>
 
 <Meta title={meta.title} description={meta.description} type="article" />

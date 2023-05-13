@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let title: string
 	export let description = "the esthe site :)"
-	export let type: "article" | "website" = "website"
+	export let type: "article" | "website" | "profile" = "website"
 	import { page } from "$app/stores"
 </script>
 
@@ -12,4 +12,5 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content={type} />
 	<meta name="description" content={description} />
+	<slot />
 </svelte:head>

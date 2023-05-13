@@ -1,13 +1,22 @@
 <script lang="ts">
+	import Age from "$lib/Age.svelte"
 	import Box from "$lib/Box.svelte"
+	import LittleShadow from "$lib/LittleShadow.svelte"
 	import Meta from "$lib/Meta.svelte"
 	import Post from "$lib/Post.svelte"
-	import Age from "../lib/Age.svelte"
-	import LittleShadow from "../lib/LittleShadow.svelte"
 	import { posts } from "./posts/posts.js"
 </script>
 
-<Meta title="esthe.live!!!! whoahhh" />
+<Meta
+	title="esthe.live!!!! whoahhh!!"
+	description="esthedebeste's little homepage :3"
+	type="profile"
+>
+	<meta property="profile:first_name" content="esthe" />
+	<meta property="profile:last_name" content="de beste" />
+	<meta property="profile:username" content="esthedebeste" />
+	<meta property="profile:gender" content="female" />
+</Meta>
 
 <main>
 	<Box>
