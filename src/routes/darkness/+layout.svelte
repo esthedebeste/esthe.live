@@ -9,4 +9,6 @@
 	}
 </script>
 
+<!-- for :has() selectors -->
+<darkness hidden />
 <slot />

@@ -24,6 +24,7 @@
 		list-style: none;
 		margin: 0;
 		position: fixed;
+		height: fit-content;
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
@@ -37,8 +38,21 @@
 		font-size: min(1.5em, 7.5vw);
 		background-color: #ffffff01;
 		opacity: 0.25;
-		left: 0;
-		transform: translateX(0);
+		left: unset;
+		right: 0;
+		top: 0;
+		transform: translateX(0%);
+		gap: 0.7ch;
+	}
+	/* Seperate because a decent amount of people don't have `:has` yet, and a comma expression would fully fail to apply because the matcher would fail to parse. */
+	:global(body:has(darkness)) ul { 
+		font-size: min(1.5em, 7.5vw);
+		background-color: #ffffff01;
+		opacity: 0.25;
+		left: unset;
+		right: 0;
+		top: 0;
+		transform: translateX(0%);
 		gap: 0.7ch;
 	}
 	li {
