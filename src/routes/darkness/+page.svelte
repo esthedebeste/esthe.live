@@ -4,13 +4,13 @@
 	import Question from "./Question.svelte"
 	// in case svelte starts optimizing ors away, i want both the $page and the location to be checked every time.
 	const or = (a: boolean, b: boolean) => a || b
+	$: question = or($page.url.href.endsWith("?"), globalThis.location?.href.endsWith("?"))
 </script>
 
-{#if or($page.url.href.endsWith("?"), globalThis.location?.search !== "" || globalThis.location?.href.endsWith("?"))}
-	<Meta title="darkness?" description=";p" />
+<Meta title={question ? "darkness?" : "darkness"} description={question ? ";p" : ":3"} />
+{#if question}
 	<Question />
 {:else}
-	<Meta title="darkness" description=":3" />
 	<main>
 		angel,<br />
 		<small>come closer.</small>
