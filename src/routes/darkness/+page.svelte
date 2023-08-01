@@ -2,9 +2,7 @@
 	import { page } from "$app/stores"
 	import Meta from "$lib/Meta.svelte"
 	import Question from "./Question.svelte"
-	// in case svelte starts optimizing ors away, i want both the $page and the location to be checked every time.
-	const or = (a: boolean, b: boolean) => a || b
-	$: question = or($page.url.href.endsWith("?"), globalThis.location?.href.endsWith("?"))
+	$: question = $page.url.href.endsWith("?") || globalThis.location?.href.endsWith("?")
 </script>
 
 <Meta title={question ? "darkness?" : "darkness"} description={question ? ";p" : ":3"} />
