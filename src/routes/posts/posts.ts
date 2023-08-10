@@ -8,6 +8,7 @@ export type Post = {
 }
 
 import rawPosts from "./posts.json"
+export type RawPost = (typeof rawPosts)[0]
 
 export const posts: Post[] = rawPosts.map(p => ({
 	...p,

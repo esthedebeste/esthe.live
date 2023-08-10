@@ -4,7 +4,14 @@
 	import LittleShadow from "$lib/LittleShadow.svelte"
 	import Meta from "$lib/Meta.svelte"
 	import Post from "$lib/Post.svelte"
+	import InvisibleA from "../lib/InvisibleA.svelte"
+	import Mini from "../lib/Mini.svelte"
+	import { has } from "../lib/utils.js"
+	import { minis } from "./minis/minis.js"
 	import { posts } from "./posts/posts.js"
+
+	const mixed = [...posts, ...minis]
+	mixed.sort((a, b) => b.date.getTime() - a.date.getTime())
 </script>
 
 <Meta
@@ -58,10 +65,16 @@
 	</Box>
 </main>
 
-<h1>latest blog posts :3</h1>
+<h1>latest posts & minis :3</h1>
 
-{#each posts as post}
-	<Post {post} />
+{#each mixed as thing}
+	{#if has(thing, "slug")}
+		<Post post={thing} />
+	{:else}
+		<InvisibleA href={`/minis/${thing.uuid}`}>
+			<Mini preview mini={thing} />
+		</InvisibleA>
+	{/if}
 {/each}
 
 <style>
@@ -72,6 +85,8 @@
 	}
 	span.pronouns {
 		color: #f0f;
-		text-shadow: 0 0 0.5em #000, 0 0 0.5em #0003;
+		text-shadow:
+			0 0 0.5em #000,
+			0 0 0.5em #0003;
 	}
 </style>

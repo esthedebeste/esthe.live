@@ -1,11 +1,18 @@
 <script lang="ts">
 	export let tag = "div"
 	export let align: "start" | "center" = "center"
+	export let background: string | undefined = undefined
 	let class_ = ""
 	export { class_ as class }
 </script>
 
-<svelte:element this={tag} style:align-items={align} class={class_}>
+<svelte:element
+	this={tag}
+	style:align-items={align}
+	style:background-color={background}
+	style:box-shadow={background ? `0 0 1em ${background}` : undefined}
+	class={class_}
+>
 	<slot />
 </svelte:element>
 
