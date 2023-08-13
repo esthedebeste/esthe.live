@@ -7,6 +7,7 @@
 <style>
 	h1 {
 		color: var(--link-color);
+		cursor: pointer;
 		padding: 0;
 		margin: 0;
 	}

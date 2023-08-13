@@ -56,6 +56,8 @@
 		font-size: 0.75em;
 	}
 	button {
+		transition: all 0.25s;
+		cursor: pointer;
 		font-size: 0.75em;
 		border: none;
 		border-radius: 4px;
@@ -64,5 +66,11 @@
 		color: #fff;
 		text-shadow: 0 0 8px #fff;
 		box-shadow: 0 0 8px #05a;
+	}
+	button:active,
+	button:hover {
+		background: #05f;
+		box-shadow: 0 0 8px #05f;
+		transform: scaleY(1.2);
 	}
 </style>

@@ -11,4 +11,7 @@
 		color: inherit;
 		text-decoration: none;
 	}
+	a:hover {
+		cursor: default;
+	}
 </style>
