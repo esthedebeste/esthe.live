@@ -95,7 +95,7 @@ const config = {
 				const sitemap = files
 					.filter(f => f.endsWith(".html") && !f.endsWith("404.html"))
 					.map(f => f.replace("build", "https://esthe.live"))
-					.map(f => f.replace(/index\.html$/, ""))
+					.map(f => f.replace(/index\.html$/, "").replace(/\.html$/, ""))
 					.join("\n")
 				writeFileSync("build/sitemap.txt", sitemap)
 			},
